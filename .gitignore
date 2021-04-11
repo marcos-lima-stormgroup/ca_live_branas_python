@@ -1,0 +1,4 @@
+.idea/
+pg_data/
+*.pyc
+__pycache__/
