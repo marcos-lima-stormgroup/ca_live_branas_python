@@ -2,3 +2,4 @@
 pg_data/
 *.pyc
 __pycache__/
+.coverage

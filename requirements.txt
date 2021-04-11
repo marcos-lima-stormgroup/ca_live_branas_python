@@ -2,3 +2,6 @@ pytest==6.2.3
 flake8==3.9.0
 pytest-cov==2.11.1
 psycopg2-binary==2.8.6
+flask==1.1.2
+bottle==0.12.19
+pyramid==2.0

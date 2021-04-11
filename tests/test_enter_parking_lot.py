@@ -6,7 +6,7 @@ from _pytest.python_api import raises
 from parking_lot.core.interactors.enter_parking_lot_interactor import \
     EnterParkingLotInteractor
 from parking_lot.core.interactors.get_parking_lot import \
-    GetParkingLotInteractor
+    GetParkingLotInteractor, GetParkingLotRequestModel
 from parking_lot.infra.repository.parking_lot_repository_memory import \
     ParkingLotRepositoryMemory
 
@@ -15,14 +15,16 @@ class TestParkingLot(TestCase):
     def test_should_get_parking_lot(self):
         repository = ParkingLotRepositoryMemory()
         get_interactor = GetParkingLotInteractor(repository)
-        parking_lot = get_interactor.run('shopping')
+        request = GetParkingLotRequestModel('shopping')
+        parking_lot = get_interactor.run(request)
         self.assertEqual(parking_lot.code, 'shopping')
 
     def test_should_enter_parking_lot(self):
         repository = ParkingLotRepositoryMemory()
         enter_interactor = EnterParkingLotInteractor(repository)
         get_interactor = GetParkingLotInteractor(repository)
-        parking_lot_before = get_interactor.run('shopping')
+        request = GetParkingLotRequestModel('shopping')
+        parking_lot_before = get_interactor.run(request)
         self.assertEqual(parking_lot_before.occupied_spaces, 0)
 
         enter_date = datetime.fromisoformat('2021-03-01T10:00:00')
@@ -30,14 +32,15 @@ class TestParkingLot(TestCase):
                              'MMM-0001',
                              enter_date)
 
-        parking_lot_after = get_interactor.run('shopping')
+        parking_lot_after = get_interactor.run(request)
         self.assertEqual(parking_lot_after.occupied_spaces, 1)
 
     def test_shoud_be_closed(self):
         repository = ParkingLotRepositoryMemory()
         enter_interactor = EnterParkingLotInteractor(repository)
         get_interactor = GetParkingLotInteractor(repository)
-        parking_lot_before = get_interactor.run('shopping')
+        request = GetParkingLotRequestModel('shopping')
+        parking_lot_before = get_interactor.run(request)
         self.assertEqual(parking_lot_before.occupied_spaces, 0)
 
         enter_date = datetime.fromisoformat('2021-03-01T23:00:00')
@@ -50,7 +53,8 @@ class TestParkingLot(TestCase):
         repository = ParkingLotRepositoryMemory()
         enter_interactor = EnterParkingLotInteractor(repository)
         get_interactor = GetParkingLotInteractor(repository)
-        parking_lot_before = get_interactor.run('shopping')
+        request = GetParkingLotRequestModel('shopping')
+        parking_lot_before = get_interactor.run(request)
         self.assertEqual(parking_lot_before.occupied_spaces, 0)
 
         enter_date = datetime.fromisoformat('2021-03-01T10:00:00')

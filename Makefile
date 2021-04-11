@@ -75,3 +75,12 @@ deploy: clean install ## Executa o chalice deploy.
 
 apidoc:
 	chalice_support apidoc --output doc --title $(APIDOC_TITLE) --description $(APIDOC_DESCRIPTION) --version $(APIDOC_VERSION)
+
+flask:
+	python parking_lot.infra.http.flask_app
+
+bottle:
+	python -m parking_lot.infra.http.bottle_app
+
+pyramid:
+	python -m parking_lot.infra.http.pyramid_app
