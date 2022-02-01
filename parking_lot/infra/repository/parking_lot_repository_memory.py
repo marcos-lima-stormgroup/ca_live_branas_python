@@ -10,12 +10,12 @@ class ParkingLotRepositoryMemory(ParkingLotRepository):
     def __init__(self):
         self.parking_lots = {
             "shopping": {"code": "shopping",
-                         "capacity": 5,
+                         "capacity": 45,
                          "open_hour": 8,
                          "close_hour": 22,
                          "occupied_spaces": 0}
         }
-        self.parked_cars = []
+        self.parked_cars = dict()
 
     def get(self, code) -> ParkingLot:
         parking_lot_data = self.parking_lots[code]
@@ -28,4 +28,4 @@ class ParkingLotRepositoryMemory(ParkingLotRepository):
         return parking_lot
 
     def save_parked_car(self, code: str, plate: str, date: datetime):
-        self.parked_cars.append({'code': code, 'plate': plate, 'date': date})
+        self.parked_cars[code] = {'code': code, 'plate': plate, 'date': date}

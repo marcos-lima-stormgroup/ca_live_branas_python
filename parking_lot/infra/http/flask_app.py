@@ -32,14 +32,8 @@ def entry_point():
 @app.route('/parkingLots/<code>')
 def get_parkinglot_by_id(code):
     get_request = GetParkingLotRequestModel(code)
-    response = FlaskAdapter.handle_get(
-        ParkingLotController.get_parking_lot)(get_request)
-
-    return {"code": response.code,
-            "capacity": response.capacity,
-            "open_hour": response.open_hour,
-            "close_hour": response.close_hour,
-            "occupied_spaces": response.occupied_spaces}
+    handle_fn = FlaskAdapter.handle_get(ParkingLotController.get_parking_lot)
+    return handle_fn(get_request)
 
 
 if __name__ == '__main__':

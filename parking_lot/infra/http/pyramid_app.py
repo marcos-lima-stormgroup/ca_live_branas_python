@@ -11,9 +11,8 @@ from parking_lot.core.interactors.get_parking_lot import \
 
 def get_parking_lots(request):
     get_request = GetParkingLotRequestModel(request.matchdict['code'])
-    response = PyramidAdapter.handle_get(
-        ParkingLotController.get_parking_lot)(get_request)
-
+    handle_fn = PyramidAdapter.handle_get(ParkingLotController.get_parking_lot)
+    response = handle_fn(get_request)
     return response
 
 

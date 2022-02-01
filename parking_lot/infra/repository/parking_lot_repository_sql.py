@@ -14,7 +14,10 @@ class ParkingLotRepositorySql(ParkingLotRepository):
         cur = conn.cursor()
         cur.execute(get_parking_lots, (code,))
         parking_lot_data = cur.fetchone()
-        return ParkingLotAdapter.create(*parking_lot_data)
+        if parking_lot_data is None:
+            print('ParkingLot not found!')
+            return ParkingLot('000', 0, 0, 0, 0)
+        return ParkingLot(*parking_lot_data)
 
     def save_parked_car(self, code: str, plate: str, date: datetime):
         cur = conn.cursor()

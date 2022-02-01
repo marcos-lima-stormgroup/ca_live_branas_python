@@ -6,7 +6,7 @@ from pyramid.response import Response
 class PyramidAdapter:
     @staticmethod
     def handle_get(controller):
-        def handle(code):
+        def handle(code) -> Response:
             response = controller(code)
             return Response(
                 body=json.dumps({"code": response.code,
