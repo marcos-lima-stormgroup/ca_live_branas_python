@@ -7,6 +7,7 @@ from parking_lot.core.interactors.get_parking_lot import \
     GetParkingLotRequestModel
 
 if __name__ == '__main__':
+    # Teste para pull-request intra repo.
     print('CLI Parking Lot')
     try:
         if sys.argv[1] == 'get_parking_lot':
